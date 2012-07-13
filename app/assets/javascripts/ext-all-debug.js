@@ -87382,6 +87382,7 @@ Ext.define('Ext.grid.column.Column', {
     
     sortable: true,
 
+    
 
     
 

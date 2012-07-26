@@ -1,18 +1,30 @@
 <%= javascript_include_tag "app/basic.js" %>
 <%= javascript_include_tag "app/material/index.js" %>
+<%= javascript_include_tag "app/material/form.js" %>
+<%= javascript_include_tag "app/material/tree.js" %>
+<%= javascript_include_tag "app/material/any.js" %>
+<%= javascript_include_tag "app/material/query.js" %>
 <script type="text/javascript">
     Ext.onReady(function (){
         Ext.create("Ext.Viewport", { 
             layout : {
-                type : 'border',
+                type : 'fit',
                 padding : 5
             },
             defaults : { 
                 split : true
             },
             items : [
-                { html : 'west', region : 'west' },
-                { html : 'center', region : 'center' }
+                //Ext.create("Material.form", { region : 'west', listeners : { 
+                //    'afterclear' : function () { 
+                //        alert("After Click Clear!");
+                //    },
+                //    'clickquery' : function () { 
+                //        alert("Click Query");
+                //    }
+                //} }),
+                //Ext.create("Material.tree", { region : 'west' }),
+                Ext.create("Material.index")
             ]
         });
     });

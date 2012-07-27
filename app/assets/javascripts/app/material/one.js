@@ -6,23 +6,34 @@ Ext.define("Material.one", {
         var me = this;
         return [{ 
             xtype : 'textfield',
+            fieldLabel : 'ID',
+            readOnly : true,
+            name : 'id'
+        }, { 
+            xtype : 'textfield',
             fieldLabel : '编号',
             readOnly : true,
-            name : 'number'
+            name : 'number',
+            allowBlank : false,
+            blankText : 'Number is required!'
         }, { 
             xtype : 'textfield',
             fieldLabel : '物料名',
             readOnly : true,
-            name : 'name'
+            name : 'name',
+            allowBlank : false,
+            blankText : 'Name is required!'
         }, { 
             xtype : 'textfield',
             fieldLabel : '供应商',
             readOnly : true,
-            name : 'supplier'
+            name : 'supplier',
+            allowBlank : false,
+            blankText : 'Supplier is required!'
         }];
     },
     setReadOnly : function (b) { 
-        for(var i = 0; i < this.items.length; i ++) {
+        for(var i = 1; i < this.items.length; i ++) {
             this.getComponent(i).setReadOnly(b);
         }
     },
@@ -64,28 +75,32 @@ Ext.define("Material.one", {
     insertButtons : function () { 
         var me = this, r = [];
         me.bns = [
-                Ext.create("Ext.button.Button", { 
+                Ext.create("Ext.button.Button", {
                     text : '保存',
-                    handler : function () { 
-                        me.fireEvent("aftersave");
+                    handler : function () {
+                        if(me.getForm().isValid()) { 
+                            me.fireEvent("aftersave", me.getForm().getValues());
+                        }
                     }
                 }),
-                Ext.create("Ext.button.Button", { 
+                Ext.create("Ext.button.Button", {
                     text : '更新',
                     handler : function () { 
-                        me.fireEvent("aftersave");
+                        if(me.getForm().isValid()) { 
+                            me.fireEvent("afterupdate", me.getForm().getValues());
+                        }
                     }
                 }),
-                Ext.create("Ext.button.Button", { 
+                Ext.create("Ext.button.Button", {
                     text : '重置',
-                    handler : function () { 
-                        me.fireEvent("aftersave");
+                    handler : function () {
+                        me.fireEvent("afterreset", me);
                     }
                 }),
                 Ext.create("Ext.button.Button", { 
                     text : '取消',
                     handler : function () { 
-                        me.fireEvent("aftersave");
+                        me.fireEvent("aftercancel", me.getForm().getValues());
                     }
                 })
         ];
@@ -100,6 +115,6 @@ Ext.define("Material.one", {
         this.buttons = this.insertButtons();
         this.callParent(arguments);
 
-        this.addEvents("aftersave", "afterupdate", "aftercancel", "afterclear");
+        this.addEvents("aftersave", "afterupdate", "aftercancel", "afterreset");
     }
 });

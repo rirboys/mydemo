@@ -1,4 +1,4 @@
-Ext.define("Material.form", { 
+Ext.define("Material.form", {
     extend : 'Ext.form.Panel',
     requires : ['Ext.form.Panel'],
     split : true,
@@ -33,13 +33,12 @@ Ext.define("Material.form", {
             bns = [{
                 text : '查询',
                 handler : function () { 
-                    alert("You have clicked this button : 'query'");
-                    me.fireEvent('clickQuery');
+                    me.fireEvent('clickQuery', Ext.usg.removeBlankValues(me.getForm().getValues()));
                 }
             }, {
-                text : '重置',
-                handler : function () { 
-                    alert("You have clicked this button : 'clear'");
+                text : '清空',
+                handler : function () {
+                    me.getForm().reset();
                     me.fireEvent('afterclear');
                 }
             }];

@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
 gem 'importex'
+gem 'will_paginate'
+gem 'ruby-debug-base19', '~>0.11.26'
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 
 # Gems used only for assets and not required

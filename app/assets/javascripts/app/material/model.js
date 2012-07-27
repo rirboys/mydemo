@@ -4,7 +4,8 @@ Ext.define('Material.model', {
         { name : 'id' },
         { name : 'number' },
         { name : 'name' },
-        { name : 'supplier' }
+        { name : 'supplier' },
+        { name : 'created_at', type : 'date' }
     ],
     idProperty : 'id'
 });

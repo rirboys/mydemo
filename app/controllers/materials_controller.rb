@@ -2,46 +2,29 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-    @materials = Material.all
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @materials }
+      format.json { 
+          @order = params[:order].blank? ? "" : params[:order]
+
+          @materials = case
+                       when !params[:link].blank? then Material.link(params[:link]) \
+                                                    .paginate(:page => params[:page].to_i, :limit => params[:limit].to_i, :order => @order)
+                       when !params[:conditions].blank? then Material.where(ActiveSupport::JSON.decode(params[:conditions])) \
+                                                    .paginate(:page => params[:page].to_i, :limit => params[:limit].to_i, :order => @order)
+                       when !params[:any].blank? then Material.any(params[:any]) \
+                                                    .paginate(:page => params[:page].to_i, :limit => params[:limit].to_i, :order => @order)
+                       else Material.paginate(:page => params[:page].to_i, :limit => params[:limit].to_i, :order => @order)
+                       end
+          render json: { :materials => @materials, :totalRecord => @materials.count } 
+      }
     end
-  end
-
-  # GET /materials/1
-  # GET /materials/1.json
-  def show
-    @material = Material.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @material }
-    end
-  end
-
-  # GET /materials/new
-  # GET /materials/new.json
-  def new
-    @material = Material.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @material }
-    end
-  end
-
-  # GET /materials/1/edit
-  def edit
-    @material = Material.find(params[:id])
   end
 
   # POST /materials
   # POST /materials.json
   def create
     @material = Material.new(params[:material])
-
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: 'Material was successfully created.' }

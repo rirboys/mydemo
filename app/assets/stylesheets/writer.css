@@ -1,0 +1,39 @@
+.icon-user {
+    background-image: url(user.png) !important;
+}
+
+.icon-user-add {
+    background-image: url(user_add.gif) !important;
+}
+
+.icon-save {
+    background-image: url(save.gif) !important;
+}
+
+.icon-reset {
+    background-image: url(stop.png) !important;
+}
+
+.icon-grid {
+    background-image: url(grid.png) !important;
+}
+
+.icon-add {
+    background-image: url(add.png) !important;
+}
+
+.icon-delete {
+    background-image: url(delete.png) !important;
+}
+.icon-print { 
+    background-image: url(application_go.png) !important;
+}
+.icon-leading-out { 
+    background-image: url(table_refresh.png) !important;
+}
+.icon-summary { 
+    background-image: url(plugin.gif) !important;
+}
+.icon-out { 
+    background-image: url(cross.gif) !important;
+}
